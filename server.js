@@ -3,9 +3,15 @@ const bodyParser = require('body-parser');
 const app = express();
 const bubblesort = require('./routes/bubblesort');
 
+
 app.use(bodyParser.urlencoded({
   extended:true
 }));
+
+
+app.use(bodyParser.json())
+
+app.use(bodyParser.json({ type: 'application/*+json' }))
 
 app.use('/bubblesort', bubblesort);
 
