@@ -20,4 +20,4 @@ return quickSort(left).concat(pivot, quickSort(right));
 
 };
 
-// quickSort([6, 3, 8, 1, 5, 4, 7, 2]);
+// quickSort([4, 2, 8 , 7 , 1]);
