@@ -1,61 +1,70 @@
 module.exports = function mergeSort(numArr){
 
-let lengthOfArr = numArr.length;
-let middle = lengthOfArr/2;
-let left = [];
-let right = [];
+  let lengthOfArr = numArr.length;
+  let middle = lengthOfArr/2;
+  let left = [];
+  let right = [];
 
-if(lengthOfArr < 2){
-  return;
-}
+  //base cases
+  if(lengthOfArr < 2){
+    return;
+  }
 
-for (var i =0; i < lengthOfArr; i++){
-    if (numArr.indexOf(numArr[i]) < middle){
-      left.push(numArr[i]);
-    } else {
-      right.push(numArr[i]);
-    }
-}
+  //pushes to the left or right depending where the middle number
+  for (var i =0; i < lengthOfArr; i++){
+      if (numArr.indexOf(numArr[i]) < middle){
+        left.push(numArr[i]);
+      } else {
+        right.push(numArr[i]);
+      }
+  }
 
-
-mergeSort(left);
-mergeSort(right);
-return merge(left,right, numArr);
+  mergeSort(left);
+  mergeSort(right);
+  return merge(left,right, numArr);
 
 
 };
 
+//used to merge the left array and right array into the main array
 function merge(left, right, numArr){
 
   var lengthOfLeft = left.length;
   var lengthOfRight = right.length;
-  var i = 0;
-  var j = 0;
-  var k = 0;
+  var l = 0;
+  var r = 0;
+  var a = 0;
 
-  while(i < lengthOfLeft && j < lengthOfRight){
-    if (left[i] <= right[j]) {
-      numArr[k] = left[i];
-      i +=1;
+  //depending on either if the first number on the left or right side is larger
+  //the 'l' or 'r' will be incremented. 'a' will always increment
+  while(l < lengthOfLeft && r < lengthOfRight){
+    if (left[l] <= right[r]) {
+      numArr[a] = left[l];
+      l +=1;
     } else{
-      numArr[k] = right[j];
-      j += 1
+      numArr[a] = right[r];
+      r += 1
     }
-    k +=1;
+    a +=1;
   }
-  while(i < lengthOfLeft) {
-    numArr[k] = left[i];
-    i +=1;
-    k +=1;
+
+  //since the lesser value has been placed on the 1st index, the second number needs
+  //to fill in the 2nd array index
+  while(l < lengthOfLeft) {
+    numArr[a] = left[l];
+    l +=1;
+    a +=1;
   }
-  while(j < lengthOfRight){
-    numArr[k] = right[j];
-    j +=1;
-    k +=1;
+  while(r < lengthOfRight){
+    numArr[a] = right[r];
+    r +=1;
+    a +=1;
   }
+
+  //returns sorted array from each call stack
   return numArr;
 }
 
 
-// mergeSort([2, 4, 1, 6, 8, 5, 3, 7]);
+// mergeSort([4, 2, 1, 6]);
 
